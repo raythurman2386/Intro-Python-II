@@ -8,6 +8,6 @@ class Room:
         self.description = description
 
     def __str__(self):
-        output = f"Welcome to {self.name}!"
-        output += f"\n{self.description}"
+        output = f"\nWelcome to the {self.name}!"
+        output += f"\n\n{self.description}"
         return output

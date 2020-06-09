@@ -8,4 +8,4 @@ class Player:
         self.current_room = current_room
 
     def __str__(self):
-        return f"{self.name} is in the {self.current_room}"
+        return f"Player: {self.name} \nCurrent Room: {self.current_room}"

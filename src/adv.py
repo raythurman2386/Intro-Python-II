@@ -38,6 +38,9 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+def initialize_player():
+    player_name = input("Please tell us your name :) ").capitalize()
+    return Player(player_name, room['outside'])
 
 # Write a loop that:
 #
@@ -50,16 +53,15 @@ room['treasure'].s_to = room['narrow']
 #
 # If the user enters "q", quit the game.
 def main():
-    print(f"Welcome to Adventure!")
-    player_name = input("Please input your name :) ").capitalize()
-    player = Player(player_name, room['outside'])
-    print(player.name)
-    print(player.current_room)
+    print("\nWelcome traveler!")
+    player = initialize_player()
+    print(f"\nWell, {player.name} prepare for a whirlwind of an adventure!")
+    print(f"\n{player.current_room}")
 
     explore = True
     while explore:
         choice = input(
-            "Please input n, s, w, e to move into a new room, or press 'q' to exit: ").lower()
+            "\nPlease input n, s, w, e to move into a new room, or press 'q' to exit: ").lower()
 
         try:
             if choice == 'q':
@@ -67,21 +69,25 @@ def main():
 
             if choice == 'n':
                 player.current_room = player.current_room.n_to
-                print(player)
+                print(player.current_room)
             elif choice == 's':
                 player.current_room = player.current_room.s_to
-                print(player)
+                print(player.current_room)
             elif choice == 'w':
                 player.current_room = player.current_room.w_to
-                print(player)
+                print(player.current_room)
             elif choice == 'e':
                 player.current_room = player.current_room.e_to
-                print(player)
+                print(player.current_room)
 
             else:
                 print("Please choose one of the cardinal directions, n, s, e, or w.")
         except:
-            break
+            print("\n\n***************************************************************************************")
+            print("\nYou must follow the directions the room offers, can't just go smashing through walls!")
+            print("(Although that would probably be more fun)")
+            print("***************************************************************************************")
+            print(f"\n{player.current_room}")
 
 
 if __name__ == '__main__':
