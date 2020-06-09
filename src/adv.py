@@ -38,7 +38,6 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player('Ray', 'outside')
 
 # Write a loop that:
 #
@@ -50,18 +49,40 @@ player = Player('Ray', 'outside')
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-print(f"Welcome to Adventure, {player.name}!")
-print(room[player.room])
+def main():
+    print(f"Welcome to Adventure!")
+    player_name = input("Please input your name :) ").capitalize()
+    player = Player(player_name, room['outside'])
+    print(player.name)
+    print(player.current_room)
 
-explore = True
-while explore:
-    choice = input(
-        "Please input n, s, w, e to move into a new room, or press 'q' to exit: ")
+    explore = True
+    while explore:
+        choice = input(
+            "Please input n, s, w, e to move into a new room, or press 'q' to exit: ").lower()
 
-    try:
-        if choice == 'q':
-            explore = False
-        else:
-            print(choice)
-    except:
-        break
+        try:
+            if choice == 'q':
+                explore = False
+
+            if choice == 'n':
+                player.current_room = player.current_room.n_to
+                print(player)
+            elif choice == 's':
+                player.current_room = player.current_room.s_to
+                print(player)
+            elif choice == 'w':
+                player.current_room = player.current_room.w_to
+                print(player)
+            elif choice == 'e':
+                player.current_room = player.current_room.e_to
+                print(player)
+
+            else:
+                print("Please choose one of the cardinal directions, n, s, e, or w.")
+        except:
+            break
+
+
+if __name__ == '__main__':
+    main()
