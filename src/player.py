@@ -12,4 +12,11 @@ class Player:
         return f"Player: {self.name} \nCurrent Room: {self.current_room}"
 
     def get_item(self, item):
-        return self.items.append(item)
+        self.current_room.remove_item(item)
+        self.items.append(item)
+        return f"You picked up {item.name}"
+
+    def drop_item(self, item):
+        self.current_room.add_item(item)
+        del self.items[item]
+        return f"You dropped {item.name}"
