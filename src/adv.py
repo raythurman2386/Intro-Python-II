@@ -1,7 +1,7 @@
-import random
+from random import choice
 from room import Room
 from player import Player
-from game import game
+from game import game, Game
 from item import items
 
 # Declare all the rooms
@@ -45,8 +45,8 @@ def initialize_player():
 # TODO: Need to randomly generate items to random rooms
 def randomize_items(items, room):
     for item in range(len(items)):
-        random_room = random.choice([i for i in room])
-        random_item = random.choice([i for i in items])
+        random_room = choice([i for i in room])
+        random_item = choice([i for i in items])
         del items[random_item]
         room[random_room].items.append(random_item)
 
@@ -68,8 +68,7 @@ def main():
     randomize_items(items, room)
     print(f"\nWell, {player.name} prepare for a whirlwind of an adventure!")
     print(f"\n{player.current_room}")
-    explore = True
-    game(explore, player)
+    Game(player, room).play_game()
 
 
 if __name__ == '__main__':
