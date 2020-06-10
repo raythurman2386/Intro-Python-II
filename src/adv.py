@@ -1,8 +1,10 @@
+import random
 from room import Room
 from player import Player
 from game import game
-# Declare all the rooms
+from item import items
 
+# Declare all the rooms
 room = {
     'outside':  Room("Outside Cave Entrance",
                      "North of you, the cave mount beckons"),
@@ -24,7 +26,6 @@ earlier adventurers. The only exit is to the south."""),
 
 
 # Link rooms together
-
 room['outside'].n_to = room['foyer']
 room['foyer'].s_to = room['outside']
 room['foyer'].n_to = room['overlook']
@@ -34,16 +35,20 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
-#
-# Main
-#
 
 # Make a new player object that is currently in the 'outside' room.
-
-
 def initialize_player():
     player_name = input("Please tell us your name :) ").capitalize()
     return Player(player_name, room['outside'])
+
+
+# TODO: Need to randomly generate items to random rooms
+def randomize_items(items, room):
+    for item in range(len(items)):
+        random_room = random.choice([i for i in room])
+        random_item = random.choice([i for i in items])
+        del items[random_item]
+        room[random_room].items.append(random_item)
 
 # Write a loop that:
 #
@@ -60,9 +65,9 @@ def initialize_player():
 def main():
     print("\nWelcome traveler!")
     player = initialize_player()
+    randomize_items(items, room)
     print(f"\nWell, {player.name} prepare for a whirlwind of an adventure!")
     print(f"\n{player.current_room}")
-
     explore = True
     game(explore, player)
 
