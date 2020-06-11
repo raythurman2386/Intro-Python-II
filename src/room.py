@@ -13,7 +13,7 @@ class Room:
         self.items = []
 
     def __str__(self):
-        output = f"\n{self.name}: {self.description}\n"
+        output = f"\n{self.name}: {self.description}\n\n"
         if self.s_to:
             output += f'To the south is: {self.s_to.name}\n'
         if self.e_to:
@@ -23,6 +23,13 @@ class Room:
         if self.w_to:
             output += f'To the west is: {self.w_to.name}\n'
         return output
+
+    def explore_room(self):
+        cmd = input(f"Would you like to explore the {self.name}? Y or N ").lower()
+        if cmd == "y":
+            self.show_items()
+        else:
+            return
 
     def show_items(self):
         i = 1

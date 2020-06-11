@@ -8,7 +8,7 @@ from player import Player
 def initialize_player():
     player_name = input("Please tell us your name :) ").capitalize()
     print(f"\nWell, {player_name} prepare for a whirlwind of an adventure!")
-    print(f"\n{room['outside']}")
+    print(f"{room['outside']}")
     return Player(player_name, room['outside'])
 
 

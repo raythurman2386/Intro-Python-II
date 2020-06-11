@@ -18,40 +18,37 @@ class Game:
 
     def play_game(self):
         explore = True
+        stars = (60 - len("*")) * "*"
         while explore:
-            choice = input(
-                "\nPlease input n, s, w, e to move into a new room, or press 'q' to exit: ").lower()
+            choice = self.player.make_choice()
 
             try:
-                if choice == 'q':
-                    explore = False
-
                 if choice == 'n':
-                    self.player.current_room = self.player.current_room.n_to
+                    self.player.move_room(self.player.current_room.n_to)
+                    self.player.current_room.explore_room()
                     print(self.player.current_room)
-                    print(f"\n{self.player.current_room.show_items()}")
                 elif choice == 's':
-                    self.player.current_room = self.player.current_room.s_to
+                    self.player.move_room(self.player.current_room.s_to)
+                    self.player.current_room.explore_room()
                     print(self.player.current_room)
-                    print(f"\n{self.player.current_room.show_items()}")
                 elif choice == 'w':
-                    self.player.current_room = self.player.current_room.w_to
+                    self.player.move_room(self.player.current_room.w_to)
+                    self.player.current_room.explore_room()
                     print(self.player.current_room)
-                    print(f"\n{self.player.current_room.show_items()}")
                 elif choice == 'e':
-                    self.player.current_room = self.player.current_room.e_to
+                    self.player.move_room(self.player.current_room.e_to)
+                    self.player.current_room.explore_room()
                     print(self.player.current_room)
-                    print(f"\n{self.player.current_room.show_items()}")
+                elif choice == 'q':
+                    explore = False
 
                 else:
                     print(
                         "Please choose one of the cardinal directions, n, s, e, or w.")
             except:
-                print(
-                    "\n\n***************************************************************************************")
+                print(stars)
                 print(
                     "\nYou must follow the directions the room offers, can't just go smashing through walls!")
-                print("(Although that would probably be more fun)")
-                print(
-                    "***************************************************************************************")
+                print("(Although that would probably be more fun)\n")
+                print(stars)
                 print(f"\n{self.player.current_room}")

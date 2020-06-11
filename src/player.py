@@ -11,6 +11,14 @@ class Player:
     def __str__(self):
         return f"Player: {self.name} \nCurrent Room: {self.current_room}"
 
+    def make_choice(self):
+        return input(
+            "Please input n, s, w, e to move into a new room, or press 'q' to exit: ").lower()
+
+    def move_room(self, room):
+        self.current_room = room
+        return print(f"\nYou have entered the {self.current_room.name}")
+
     def get_item(self, item):
         self.current_room.remove_item(item)
         self.items.append(item)
