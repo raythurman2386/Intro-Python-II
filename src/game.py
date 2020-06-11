@@ -1,3 +1,4 @@
+from setup import print_stars
 """
 TODO: List of actions needed to play the game
 
@@ -18,7 +19,6 @@ class Game:
 
     def play_game(self):
         explore = True
-        stars = (60 - len("*")) * "*"
         while explore:
             choice = self.player.make_choice()
 
@@ -46,9 +46,9 @@ class Game:
                     print(
                         "Please choose one of the cardinal directions, n, s, e, or w.")
             except:
-                print(stars)
+                print_stars()
                 print(
                     "\nYou must follow the directions the room offers, can't just go smashing through walls!")
                 print("(Although that would probably be more fun)\n")
-                print(stars)
+                print_stars()
                 print(f"\n{self.player.current_room}")

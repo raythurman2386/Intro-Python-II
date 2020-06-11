@@ -1,4 +1,5 @@
 from random import choice
+from textwrap import wrap, indent
 from room import room
 from item import items
 from player import Player
@@ -19,3 +20,11 @@ def randomize_items():
         random_item = choice([i for i in items])
         del items[random_item]
         room[random_room].items.append(random_item)
+
+
+def print_stars():
+    print((60 - len("*")) * "*")
+
+
+def format_print(str):
+    print(wrap(indent(str, '>    '), width=60))
