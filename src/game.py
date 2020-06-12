@@ -49,18 +49,15 @@ class Game:
         choice = self.player.make_choice()
         if choice == 'n' or choice == 's' or choice == 'e' or choice == 'w':
             self.move_player(choice)
-
         elif choice == 'i' or choice == 'inventory':
             self.player.list_items()
-
         elif choice.split(' ')[0] == 'take' or choice.split(' ')[0] == 'drop':
             action = choice.split(' ')[0]
             item = int(choice.split(' ')[2])
             self.perform_action(action, item)
-
         elif choice == 'q':
+            print("Hope you had a good time! Come back soon!")
             self.explore = False
-
         else:
             print("Please pick a valid action :)")
 
