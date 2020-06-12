@@ -1,3 +1,4 @@
+from item import items
 # Write a class to hold player information, e.g. what room they are in
 # currently.
 
@@ -12,19 +13,26 @@ class Player:
         return f"Player: {self.name} \nCurrent Room: {self.current_room}"
 
     def make_choice(self):
-        return input(
-            "Please input n, s, w, e to move into a new room, or press 'q' to exit: ").lower()
+        output = """\nPlease input n, s, w, e to move into a new room, or press 'q' to exit: 
+OR input I or 'inventory' to check out your inventory!
+ALSO 'take item 1' will place item 1 in your inventory for example!
+"""
+        return input(output).lower()
+
+    def list_items(self):
+        i = 1
+        if len(self.items) == 0:
+            print("\nYou have no items yet!")
+        for item in self.items:
+            print(f'\n[{i}]: {item}')
+            i += 1
 
     def move_room(self, room):
         self.current_room = room
         return print(f"\nYou have entered the {self.current_room.name}")
 
     def get_item(self, item):
-        self.current_room.remove_item(item)
-        self.items.append(item)
-        return f"You picked up {item.name}"
+        print(f"\nYou picked up {item.name}")
 
     def drop_item(self, item):
-        self.current_room.add_item(item)
-        del self.items[item]
-        return f"You dropped {item.name}"
+        print(f"\nYou dropped {item.name}")

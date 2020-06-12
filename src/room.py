@@ -1,3 +1,4 @@
+from item import items
 # Implement a class to hold room information. This should have name and
 # description attributes.
 
@@ -24,26 +25,17 @@ class Room:
             output += f'To the west is: {self.w_to.name}\n'
         return output
 
-    def explore_room(self):
-        cmd = input(f"Would you like to explore the {self.name}? Y or N ").lower()
-        if cmd == "y":
-            self.show_items()
-        else:
-            return
-
     def show_items(self):
         i = 1
         for item in self.items:
-            print(f"\n {i}: {item}")
+            print(f" [{i}]: {item}")
             i += 1
 
     def remove_item(self, item):
-        del self.items[item]
-        return f"You removed the {item.name} from {self.name}"
+        print(f"You removed the {item.name} from {self.name}")
 
     def add_item(self, item):
-        self.items.append(item)
-        return f"You added {item.name} to {self.name}"
+        print(f"You added {item.name} to {self.name}")
 
 
 # Declare all the rooms

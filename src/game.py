@@ -13,42 +13,59 @@ class Game:
     def __init__(self, player, room):
         self.player = player
         self.room = room
+        self.explore = True
 
     def __str__(self):
         return f'{self.player.name}, you are currently in the {self.player.current_room.name}.'
 
+    def location(self):
+        print(f'{self.player.current_room}')
+        self.player.current_room.show_items()
+
+    def move_player(self, choice):
+        if choice == 'n':
+            self.player.move_room(self.player.current_room.n_to)
+        elif choice == 's':
+            self.player.move_room(self.player.current_room.s_to)
+        elif choice == 'e':
+            self.player.move_room(self.player.current_room.e_to)
+        elif choice == 'w':
+            self.player.move_room(self.player.current_room.w_to)
+
+    def perform_action(self, action, item):
+        index = item - 1
+        if action == 'take':
+            self.player.items.append(self.player.current_room.items[index])
+            self.player.current_room.items.remove(
+                self.player.current_room.items[index])
+            print(self.player.list_items())
+        if action == 'drop':
+            self.player.current_room.items.append(
+                self.player.items[index])
+            self.player.items.remove(self.player.items[index])
+            print(self.player.list_items())
+
+    def user_input(self):
+        choice = self.player.make_choice()
+        if choice == 'n' or choice == 's' or choice == 'e' or choice == 'w':
+            self.move_player(choice)
+
+        elif choice == 'i' or choice == 'inventory':
+            self.player.list_items()
+
+        elif choice.split(' ')[0] == 'take' or choice.split(' ')[0] == 'drop':
+            action = choice.split(' ')[0]
+            item = int(choice.split(' ')[2])
+            self.perform_action(action, item)
+
+        elif choice == 'q':
+            self.explore = False
+
+        else:
+            print("Please pick a valid action :)")
+
+    # loop to play the game
     def play_game(self):
-        explore = True
-        while explore:
-            choice = self.player.make_choice()
-
-            try:
-                if choice == 'n':
-                    self.player.move_room(self.player.current_room.n_to)
-                    self.player.current_room.explore_room()
-                    print(self.player.current_room)
-                elif choice == 's':
-                    self.player.move_room(self.player.current_room.s_to)
-                    self.player.current_room.explore_room()
-                    print(self.player.current_room)
-                elif choice == 'w':
-                    self.player.move_room(self.player.current_room.w_to)
-                    self.player.current_room.explore_room()
-                    print(self.player.current_room)
-                elif choice == 'e':
-                    self.player.move_room(self.player.current_room.e_to)
-                    self.player.current_room.explore_room()
-                    print(self.player.current_room)
-                elif choice == 'q':
-                    explore = False
-
-                else:
-                    print(
-                        "Please choose one of the cardinal directions, n, s, e, or w.")
-            except:
-                print_stars()
-                print(
-                    "\nYou must follow the directions the room offers, can't just go smashing through walls!")
-                print("(Although that would probably be more fun)\n")
-                print_stars()
-                print(f"\n{self.player.current_room}")
+        while self.explore:
+            self.location()
+            self.user_input()
