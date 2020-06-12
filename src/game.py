@@ -1,11 +1,26 @@
 from setup import print_stars
 """
-TODO: List of actions needed to play the game
+TODO: List of actions for lighting
 
-- player choice for movement, player inventory, or explore room
-- ability to pick up item from room
-- ability to drop item in room
-- loop to play the game
+- Check for has_lighting on room entrance
+    - if no light, equip Torch
+        - if no Torch return to previous room
+- otherwise continue on
+"""
+
+"""
+TODO: List of actions needed for monsters
+
+- Randomly add monsters to room
+- ability to choose fight or run
+- player can only fight if has weapon
+- fight starts loop for attacking
+    - player attacks
+    - monster attacks
+    - till player or monster health == 0
+        - if player dies, game over
+        - if monster dies game continues on
+- run sends player to previous room
 """
 
 
@@ -81,5 +96,8 @@ class Game:
     # loop to play the game
     def play_game(self):
         while self.explore:
-            self.location()
-            self.user_input()
+            try:
+                self.location()
+                self.user_input()
+            except:
+                print("There has been an error, I am sorry :( ")

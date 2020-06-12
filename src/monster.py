@@ -1,8 +1,9 @@
 class Monster:
-    def __init__(self, type, health, damage):
+    def __init__(self, type, health, damage, current_room):
         self.type = type
         self.health = health
         self.damage = damage
+        self.current_room = current_room
 
     def __str__(self):
         print(f"The monster has {str(self.health)} left!")
@@ -12,7 +13,7 @@ class Monster:
         print(
             f"The monster takes {str(damage)} damage and has {str(self.health)} health left.")
 
-    def deal_damage(self):
+    def deal_damage(self, player):
         pass
 
 

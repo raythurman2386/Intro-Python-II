@@ -4,9 +4,11 @@ from item import items
 
 
 class Room:
-    def __init__(self, name, description):
+    def __init__(self, name, description, has_lighting=False, monster=None):
         self.name = name
         self.description = description
+        self.has_lighting = has_lighting
+        self.monster = monster
         self.n_to = None
         self.s_to = None
         self.e_to = None
