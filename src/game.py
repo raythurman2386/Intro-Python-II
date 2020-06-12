@@ -18,10 +18,12 @@ class Game:
     def __str__(self):
         return f'{self.player.name}, you are currently in the {self.player.current_room.name}.'
 
+    # Print the location on each iteration of the loop
     def location(self):
         print(f'{self.player.current_room}')
         self.player.current_room.show_items()
 
+    # Move the player in a given direction
     def move_player(self, choice):
         if choice == 'n':
             self.player.move_room(self.player.current_room.n_to)
@@ -32,6 +34,7 @@ class Game:
         elif choice == 'w':
             self.player.move_room(self.player.current_room.w_to)
 
+    # Perform an action with an item
     def perform_action(self, action, item):
         index = item - 1
         if action == 'take':
@@ -45,6 +48,8 @@ class Game:
             self.player.items.remove(self.player.items[index])
             print(self.player.list_items())
 
+    # Get user input
+    # Decide what to do with said input
     def user_input(self):
         choice = self.player.make_choice()
         if choice == 'n' or choice == 's' or choice == 'e' or choice == 'w':

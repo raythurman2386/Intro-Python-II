@@ -56,6 +56,9 @@ to north. The smell of gold permeates the air."""),
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
+
+    'courtyard': Room("Abandoned Courtyard", """This place looks as though we 
+should not be here!, Lets get out of here! Looks like there is an exit to the east."""),
 }
 
 
@@ -63,7 +66,9 @@ earlier adventurers. The only exit is to the south."""),
 room['outside'].n_to = room['foyer']
 room['foyer'].s_to = room['outside']
 room['foyer'].n_to = room['overlook']
+room['foyer'].w_to = room['courtyard']
 room['foyer'].e_to = room['narrow']
+room['courtyard'].e_to = room['foyer']
 room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
