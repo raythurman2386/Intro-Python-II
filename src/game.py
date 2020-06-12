@@ -26,12 +26,24 @@ class Game:
     # Move the player in a given direction
     def move_player(self, choice):
         if choice == 'n':
+            if self.player.current_room.n_to == None:
+                print("You cannot go that way goober!")
+                self.user_input()
             self.player.move_room(self.player.current_room.n_to)
         elif choice == 's':
+            if self.player.current_room.s_to == None:
+                print("You cannot go that way goober!")
+                self.user_input()
             self.player.move_room(self.player.current_room.s_to)
         elif choice == 'e':
+            if self.player.current_room.e_to == None:
+                print("You cannot go that way goober!")
+                self.user_input()
             self.player.move_room(self.player.current_room.e_to)
         elif choice == 'w':
+            if self.player.current_room.w_to == None:
+                print("You cannot go that way goober!")
+                self.user_input()
             self.player.move_room(self.player.current_room.w_to)
 
     # Perform an action with an item
